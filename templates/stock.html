@@ -1,0 +1,76 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+{% if current_user.role.has_permission('view_stock') %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Stok Durumu</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        {% if current_user.role.has_permission('add_stock') %}
+        <a href="{{ url_for('add_stock') }}" class="btn btn-sm btn-outline-success me-2">
+            <i class="bi bi-plus-lg"></i> Stoğa Ekle
+        </a>
+        {% endif %}
+        {% if current_user.role.has_permission('remove_stock') %}
+        <a href="{{ url_for('remove_stock') }}" class="btn btn-sm btn-outline-danger me-2">
+            <i class="bi bi-dash-lg"></i> Stoktan Düş
+        </a>
+        {% endif %}
+        {% if current_user.role.has_permission('transfer_stock') %}
+        <a href="{{ url_for('stock_transfer') }}" class="btn btn-sm btn-outline-info">
+            <i class="bi bi-shuffle"></i> Transfer
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="get" action="{{ url_for('stock') }}">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control"
+                       placeholder="Ürün Adı/Barkodu veya Lokasyon Barkodu/Açıklaması Ara..."
+                       name="query" value="{{ query or '' }}">
+                <button class="btn btn-outline-secondary" type="submit">Ara</button>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Barkodu</th>
+                        <th>Lokasyon Barkodu</th>
+                        <th>Lokasyon Açıklaması</th>
+                        <th class="text-end">Miktar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item, product, location in pagination.items %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.barcode }}</td>
+                        <td><strong>{{ location.barcode }}</strong></td>
+                        <td>{{ location.description }}</td>
+                        <td class="text-end fw-bold">{{ item.quantity }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">Stokta ürün bulunamadı.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if pagination %}
+            {% include '_pagination.html' %}
+        {% endif %}
+    </div>
+</div>
+{% else %}
+<div class="alert alert-warning mt-4" role="alert">
+    Bu sayfayı görüntüleme yetkiniz yok.
+</div>
+{% endif %}
+{% endblock %}

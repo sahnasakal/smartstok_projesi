@@ -1,0 +1,42 @@
+services:
+  web:
+    build: .
+    env_file: .env
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy # YENİ DEĞİŞİKLİK: Sadece db başlayınca değil, sağlıklı olunca başla
+    command: gunicorn -w 1 --bind 0.0.0.0:8000 app:app
+    restart: always
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: smartstok
+      POSTGRES_USER: smartstokuser
+      POSTGRES_PASSWORD: SahnasakalAlamut2017
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: always
+    healthcheck: # YENİ BÖLÜM: Veritabanının hazır olup olmadığını kontrol eder
+      test: ["CMD-SHELL", "pg_isready -U smartstokuser -d smartstok"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+      - ./www:/var/www/certbot
+    depends_on:
+      - web
+    restart: always
+
+volumes:
+  db_data:

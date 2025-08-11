@@ -1,0 +1,39 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ title }}</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if (action == 'add' and current_user.role.has_permission('add_stock')) or
+              (action == 'remove' and current_user.role.has_permission('remove_stock')) %}
+        <form method="post">
+            <div class="mb-3">
+                <label for="product_barcode" class="form-label">Ürün Barkodu</label>
+                <input type="text" class="form-control" id="product_barcode" name="product_barcode" required autofocus>
+                <div class="form-text">İşlem yapılacak ürünün barkodunu okutun veya girin.</div>
+            </div>
+            <div class="mb-3">
+                <label for="location_barcode" class="form-label">Lokasyon Barkodu</label>
+                <input type="text" class="form-control" id="location_barcode" name="location_barcode" required>
+                <div class="form-text">Ürünün ekleneceği veya düşüleceği lokasyonun barkodunu girin.</div>
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Miktar</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+            </div>
+            <a href="{{ url_for('stock') }}" class="btn btn-secondary">İptal</a>
+            <button type="submit" class="btn btn-{{ 'success' if action == 'add' else 'danger' }}">
+                {{ 'Stoğa Ekle' if action == 'add' else 'Stoktan Düş' }}
+            </button>
+        </form>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            Bu işlemi yapma yetkiniz yok.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

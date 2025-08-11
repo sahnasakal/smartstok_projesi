@@ -1,0 +1,30 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ title }}</h1>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label for="barcode" class="form-label">Barkod</label>
+                <input type="text" class="form-control" id="barcode" name="barcode" value="{{ product.barcode if product else '' }}" {% if product %}readonly{% endif %} required>
+                 {% if product %}
+                <div class="form-text">Mevcut bir ürünün barkodu değiştirilemez.</div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Ürün Adı</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ product.name if product else '' }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Açıklama</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ product.description if product else '' }}</textarea>
+            </div>
+            <a href="{{ url_for('products') }}" class="btn btn-secondary">İptal</a>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

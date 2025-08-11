@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Barkod PDF Oluþtur</h3>
+<p>Seçtiðiniz ürünler veya lokasyonlar için barkod PDF dosyasý oluþturabilirsiniz.</p>
+<form method="POST">
+    <div class="mb-3">
+        <label for="barcode_text" class="form-label">Barkod Ýçeriði</label>
+        <input type="text" name="barcode_text" id="barcode_text" class="form-control" placeholder="Barkod metni" required>
+    </div>
+    <button type="submit" class="btn btn-primary">PDF Oluþtur</button>
+</form>
+
+{% if pdf_file %}
+<hr>
+<h5>Oluþturulan PDF</h5>
+<a href="{{ url_for('static', filename='barcodes/' + pdf_file) }}" class="btn btn-success" target="_blank">PDF Ýndir</a>
+{% endif %}
+{% endblock %}

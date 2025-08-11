@@ -1,0 +1,48 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Toplu Veri Aktarımı</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if current_user.role.has_permission('edit_catalog') %}
+        <p>Lütfen <strong>Excel (.xlsx)</strong> veya <strong>.csv</strong> formatında bir dosya yükleyin. Dosyanın ilk satırı başlık satırı olmalıdır.</p>
+
+        {% if data_type == 'products' %}
+        <div class="alert alert-info">
+            <strong>Ürünler için gerekli sütunlar:</strong>
+            <ul>
+                <li><code>barcode</code>: Ürünün benzersiz barkodu.</li>
+                <li><code>name</code>: Ürünün adı.</li>
+                <li><code>description</code> (Opsiyonel): Ürün açıklaması.</li>
+            </ul>
+        </div>
+        {% elif data_type == 'locations' %}
+        <div class="alert alert-info">
+            <strong>Lokasyonlar için gerekli sütunlar:</strong>
+            <ul>
+                <li><code>barcode</code>: Lokasyonun benzersiz barkodu.</li>
+                <li><code>category_name</code>: Lokasyonun ait olduğu, sistemde daha önce oluşturulmuş kategorinin adı.</li>
+                <li><code>description</code> (Opsiyonel): Lokasyon açıklaması.</li>
+            </ul>
+        </div>
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="file" class="form-label">Dosya Seç</label>
+                <input class="form-control" type="file" id="file" name="file" accept=".xlsx,.csv" required>
+            </div>
+            <a href="{{ url_for(data_type) }}" class="btn btn-secondary">İptal</a>
+            <button type="submit" class="btn btn-primary">Yükle ve Arka Planda Başlat</button>
+        </form>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            Bu işlemi yapma yetkiniz yok.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

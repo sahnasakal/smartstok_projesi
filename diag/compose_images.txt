@@ -1,0 +1,4 @@
+CONTAINER                   REPOSITORY              TAG                 PLATFORM            IMAGE ID            SIZE                CREATED
+smartstok_projesi-db-1      postgres                13                  linux/amd64         54706ca98cd5        423MB               292 years ago
+smartstok_projesi-nginx-1   nginx                   latest              linux/amd64         2cd1d97f893f        192MB               292 years ago
+smartstok_projesi-web-1     smartstok_projesi-web   latest              linux/amd64         9477cae5a8e3        308MB               4 minutes ago

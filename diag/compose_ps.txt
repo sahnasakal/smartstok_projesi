@@ -1,0 +1,4 @@
+NAME                        IMAGE                   COMMAND                  SERVICE   CREATED         STATUS                 PORTS
+smartstok_projesi-db-1      postgres:13             "docker-entrypoint.s…"   db        2 days ago      Up 2 hours (healthy)   5432/tcp
+smartstok_projesi-nginx-1   nginx:latest            "/docker-entrypoint.…"   nginx     2 days ago      Up 2 hours             0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
+smartstok_projesi-web-1     smartstok_projesi-web   "gunicorn -w 1 --bin…"   web       4 minutes ago   Up 4 minutes           8000/tcp

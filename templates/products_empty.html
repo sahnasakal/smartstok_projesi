@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="alert alert-info mt-4">
+    Henüz ürün bulunamadý. Toplu aktarým için <a href="{{ url_for('main.import_data') }}">burayý</a> kullanabilirsiniz.
+  </div>
+</div>
+{% endblock %}

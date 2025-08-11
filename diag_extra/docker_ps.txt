@@ -1,0 +1,4 @@
+CONTAINER ID   IMAGE                   COMMAND                  CREATED          STATUS                    PORTS                                                                          NAMES
+2985dc11844b   nginx:latest            "/docker-entrypoint.…"   10 minutes ago   Up 10 minutes             0.0.0.0:80->80/tcp, [::]:80->80/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp   smartstok_projesi-nginx-1
+ed241df9a20e   smartstok_projesi-web   "gunicorn -w 1 --bin…"   10 minutes ago   Up 10 minutes             8000/tcp                                                                       smartstok_projesi-web-1
+db2d5de5708d   postgres:13             "docker-entrypoint.s…"   10 minutes ago   Up 10 minutes (healthy)   5432/tcp                                                                       smartstok_projesi-db-1

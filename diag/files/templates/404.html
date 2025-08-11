@@ -1,0 +1,8 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="container py-5">
+  <h1 class="display-6">Sayfa bulunamadı (404)</h1>
+  <p class="text-muted">Aradığınız sayfa mevcut değil veya taşınmış olabilir.</p>
+  <a class="btn btn-primary btn-sm" href="{{ url_for('dashboard') }}">Ana panele dön</a>
+</div>
+{% endblock %}

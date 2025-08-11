@@ -1,0 +1,36 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ title }}</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Rol Adı</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ role.name if role else '' }}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">İzinler</label>
+                <div class="row">
+                    {% for perm in all_permissions %}
+                    <div class="col-md-4">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="permissions" value="{{ perm.name }}" id="perm_{{ perm.id }}"
+                                   {% if role and role.has_permission(perm.name) %}checked{% endif %}>
+                            <label class="form-check-label" for="perm_{{ perm.id }}">{{ perm.description }}</label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <a href="{{ url_for('roles') }}" class="btn btn-secondary">İptal</a>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

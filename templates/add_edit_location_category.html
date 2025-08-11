@@ -1,0 +1,28 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ title }}</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if current_user.role.has_permission('edit_catalog') %}
+        <form method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Kategori Adı</label>
+                <input type="text" class="form-control" id="name" name="name"
+                       value="{{ category.name if category else '' }}"
+                       required autofocus>
+            </div>
+            <a href="{{ url_for('location_categories') }}" class="btn btn-secondary">İptal</a>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            Bu işlemi yapma yetkiniz yok.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

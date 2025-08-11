@@ -1,0 +1,37 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Boş Lokasyonlar</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="alert alert-info">Bu sayfada, içinde hiç ürün bulunmayan veya ürün miktarı sıfır olan tüm lokasyonlar listelenmektedir.</div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Barkod</th>
+                        <th>Açıklama</th>
+                        <th>Kategori</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for location in locations %}
+                    <tr>
+                        <td><strong>{{ location.barcode }}</strong></td>
+                        <td>{{ location.description }}</td>
+                        <td><span class="badge bg-secondary">{{ location.category.name }}</span></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="3" class="text-center">Tüm lokasyonlar dolu veya kayıtlı lokasyon yok.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

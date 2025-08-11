@@ -1,0 +1,52 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Ana Panel</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card text-white bg-primary h-100 d-flex flex-column">
+            <div class="card-body flex-grow-1">
+                <h5 class="card-title"><i class="bi bi-box-seam me-2"></i>Stok İşlemleri</h5>
+                <p class="card-text">Stoğa ürün ekleyin, stoktan ürün düşün veya lokasyonlar arası transfer yapın.</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+                <div class="d-flex flex-wrap">
+                    {% if current_user.can('add_stock') %}<a href="{{ url_for('add_stock') }}" class="btn btn-light btn-sm me-2 mb-1">Stoğa Ekle</a>{% endif %}
+                    {% if current_user.can('remove_stock') %}<a href="{{ url_for('remove_stock') }}" class="btn btn-light btn-sm me-2 mb-1">Stoktan Düş</a>{% endif %}
+                    {% if current_user.can('transfer_stock') %}<a href="{{ url_for('stock_transfer') }}" class="btn btn-light btn-sm mb-1">Transfer</a>{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card text-white bg-success h-100 d-flex flex-column">
+            <div class="card-body flex-grow-1">
+                <h5 class="card-title"><i class="bi bi-upc-scan me-2"></i>Hızlı Tarama</h5>
+                <p class="card-text">El terminali veya kamera ile barkod okutarak hızlı işlem yapın.</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+                <a href="{{ url_for('scan') }}" class="btn btn-light">Tarama Sayfasını Aç</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card text-white bg-info h-100 d-flex flex-column">
+            <div class="card-body flex-grow-1">
+                <h5 class="card-title"><i class="bi bi-list-check me-2"></i>Katalog Yönetimi</h5>
+                <p class="card-text">Yeni ürünler ve barkodlu depolama lokasyonları oluşturun.</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+                 <a href="{{ url_for('products') }}" class="btn btn-light btn-sm">Ürünler</a>
+                 <a href="{{ url_for('locations') }}" class="btn btn-light btn-sm">Lokasyonlar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-secondary mt-3">
+    <h4>Hoş Geldiniz, {{ current_user.username }}!</h4>
+    <p>SmartStok envanter yönetim sistemine hoş geldiniz. İşlemlerinize menüden veya hızlı erişim kartlarından başlayabilirsiniz.</p>
+</div>
+{% endblock %}

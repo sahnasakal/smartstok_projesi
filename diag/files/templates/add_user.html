@@ -1,0 +1,31 @@
+{% extends "_layout.html" %}
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ title }}</h1>
+</div>
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Kullanıcı Adı</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Şifre</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="role_id" class="form-label">Kullanıcı Rolü</label>
+                <select class="form-select" id="role_id" name="role_id" required>
+                    <option value="" disabled selected>Rol seçin...</option>
+                    {% for role in roles %}
+                    <option value="{{ role.id }}">{{ role.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <a href="{{ url_for('users') }}" class="btn btn-secondary">İptal</a>
+            <button type="submit" class="btn btn-primary">Kullanıcıyı Ekle</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

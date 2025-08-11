@@ -1,0 +1,99 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+{% if current_user.role.has_permission('view_stock') %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Barkod Okut</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header fw-bold">
+                Lazer Okuyucu / Manuel Giriş
+            </div>
+            <div class="card-body">
+                <p>El terminalinizin lazer okuyucusu ile barkodu okutun veya manuel olarak girip "Enter" tuşuna basın.</p>
+                <div class="mb-3">
+                    <label for="barcode_input" class="form-label">Barkod</label>
+                    <input type="text" class="form-control form-control-lg" id="barcode_input" placeholder="Buraya odaklanın..." autofocus>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header fw-bold">
+                Sonuç
+            </div>
+            <div class="card-body" id="result_area" style="min-height: 150px;">
+                <p class="text-muted">Okutma bekleniyor...</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-warning mt-4" role="alert">
+    Bu sayfayı görüntüleme yetkiniz yok.
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% if current_user.role.has_permission('view_stock') %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const barcodeInput = document.getElementById('barcode_input');
+    const resultArea = document.getElementById('result_area');
+
+    barcodeInput.focus();
+    barcodeInput.addEventListener('blur', function() {
+        setTimeout(() => barcodeInput.focus(), 100);
+    });
+
+    let barcodeTimeout;
+    barcodeInput.addEventListener('input', function() {
+        clearTimeout(barcodeTimeout);
+        barcodeTimeout = setTimeout(() => {
+            if (barcodeInput.value.trim() !== '') {
+                handleBarcode(barcodeInput.value.trim());
+            }
+        }, 200);
+    });
+
+    function handleBarcode(barcode) {
+        resultArea.innerHTML = `<div class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden">Yükleniyor...</span></div> Aranıyor...`;
+
+        fetch(`/api/search_barcode?barcode=${barcode}`)
+            .then(response => response.json())
+            .then(data => {
+                let resultHtml = '';
+                if (data.error) {
+                    resultHtml = `<div class="alert alert-danger"><b>Hata:</b> ${data.error}</div>`;
+                } else if (data.type === 'product') {
+                    resultHtml = `<div class="alert alert-success">
+                                    <strong>Ürün Bulundu</strong><br>
+                                    <strong>Adı:</strong> ${data.name}<br>
+                                    <strong>Barkod:</strong> ${data.barcode}
+                                  </div>`;
+                } else if (data.type === 'location') {
+                    resultHtml = `<div class="alert alert-info">
+                                    <strong>Lokasyon Bulundu</strong><br>
+                                    <strong>Barkod:</strong> ${data.barcode}<br>
+                                    <strong>Açıklama:</strong> ${data.description || ''}
+                                  </div>`;
+                }
+                resultArea.innerHTML = resultHtml;
+            })
+            .catch(error => {
+                resultArea.innerHTML = `<div class="alert alert-danger"><b>İletişim Hatası:</b> Sunucuya ulaşılamadı.</div>`;
+            })
+            .finally(() => {
+                barcodeInput.value = '';
+                barcodeInput.focus();
+            });
+    }
+});
+</script>
+{% endif %}
+{% endblock %}

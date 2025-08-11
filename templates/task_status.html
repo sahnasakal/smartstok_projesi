@@ -1,0 +1,51 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Toplu Aktarım Görev Durumu</h1>
+</div>
+<div class="card">
+    <div class="card-body">
+        <p><strong>Görev ID:</strong> {{ task.id }}</p>
+        <p><strong>Durum:</strong>
+            {% if task.state == 'PENDING' %}
+                <span class="badge bg-secondary">Bekliyor...</span>
+            {% elif task.state == 'PROGRESS' %}
+                <span class="badge bg-primary">İşleniyor...</span>
+            {% elif task.state == 'SUCCESS' %}
+                <span class="badge bg-success">Başarıyla Tamamlandı</span>
+            {% else %}
+                <span class="badge bg-danger">{{ task.state }}</span>
+            {% endif %}
+        </p>
+        
+        {% if task.state == 'PROGRESS' %}
+        <div class="progress" style="height: 25px;">
+            {% set percent = (task.info.get('current', 0) * 100 / task.info.get('total', 1)) | round %}
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{ percent }}%;" aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100">
+                {{ task.info.get('current', 0) }} / {{ task.info.get('total', 0) }}
+            </div>
+        </div>
+        <meta http-equiv="refresh" content="5">
+        <p class="mt-2 text-muted">Bu sayfa 5 saniyede bir otomatik olarak yenilenir.</p>
+        
+        {% elif task.state == 'SUCCESS' %}
+        <div class="alert alert-success">
+            <h4 class="alert-heading">İşlem Tamamlandı!</h4>
+            <p>Toplam {{ task.result.get('total', 0) }} satır işlendi.</p>
+            <hr>
+            <p class="mb-0">{{ task.result.get('imported', 0) }} yeni kayıt eklendi, {{ task.result.get('skipped', 0) }} kayıt (mevcut veya hatalı olduğu için) atlandı.</p>
+        </div>
+        <a href="{{ url_for('locations') }}" class="btn btn-primary">Lokasyonlar Sayfasına Git</a>
+
+        {% elif task.state == 'FAILURE' %}
+        <div class="alert alert-danger">
+            <h4 class="alert-heading">Görev Başarısız Oldu!</h4>
+            <p>İşlem sırasında bir hata oluştu: <strong>{{ task.info.get('message', 'Bilinmeyen hata') }}</strong></p>
+            <p class="mb-0">Veritabanında hiçbir değişiklik yapılmadı. Lütfen Excel dosyanızı kontrol edip tekrar deneyin veya sistem yöneticisiyle iletişime geçin.</p>
+        </div>
+        <a href="{{ url_for('import_data', data_type='locations') }}" class="btn btn-warning">Tekrar Dene</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

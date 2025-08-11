@@ -1,0 +1,46 @@
+{% extends "_layout.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ title }}</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if current_user.role.has_permission('edit_catalog') %}
+        <form method="post">
+            <div class="mb-3">
+                <label for="barcode" class="form-label">Lokasyon Barkodu</label>
+                <input type="text" class="form-control" id="barcode" name="barcode"
+                       value="{{ location.barcode if location else '' }}"
+                       {% if location %}readonly{% endif %} required>
+                {% if location %}
+                <div class="form-text">Mevcut bir lokasyonun barkodu değiştirilemez.</div>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+                <label for="category_id" class="form-label">Lokasyon Kategorisi</label>
+                <select class="form-select" id="category_id" name="category_id" required>
+                    <option value="" disabled selected>Kategori seçin...</option>
+                    {% for cat in categories %}
+                    <option value="{{ cat.id }}" {% if location and location.category_id == cat.id %}selected{% endif %}>
+                        {{ cat.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Açıklama</label>
+                <textarea class="form-control" id="description" name="description" rows="3">{{ location.description if location else '' }}</textarea>
+            </div>
+            <a href="{{ url_for('locations') }}" class="btn btn-secondary">İptal</a>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+        {% else %}
+        <div class="alert alert-warning" role="alert">
+            Bu sayfayı görüntüleme veya düzenleme yetkiniz yok.
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

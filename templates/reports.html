@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Raporlama ve Grafikler</h2>
+    <canvas id="stokGrafik"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+var ctx = document.getElementById('stokGrafik').getContext('2d');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Ürün A', 'Ürün B', 'Ürün C'],
+        datasets: [{
+            label: 'Stok Miktarı',
+            data: [12, 19, 3],
+            backgroundColor: 'rgba(54, 162, 235, 0.5)'
+        }]
+    }
+});
+</script>
+{% endblock %}

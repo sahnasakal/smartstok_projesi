@@ -1,0 +1,564 @@
+web-1  | 2025-08-08T10:57:40.619039715Z [2025-08-08 10:57:40 +0000] [1] [INFO] Starting gunicorn 23.0.0
+web-1  | 2025-08-08T10:57:40.619601822Z [2025-08-08 10:57:40 +0000] [1] [INFO] Listening at: http://0.0.0.0:8000 (1)
+web-1  | 2025-08-08T10:57:40.619681572Z [2025-08-08 10:57:40 +0000] [1] [INFO] Using worker: sync
+web-1  | 2025-08-08T10:57:40.624645342Z [2025-08-08 10:57:40 +0000] [6] [INFO] Booting worker with pid: 6
+web-1  | 2025-08-08T10:58:10.710434868Z [2025-08-08 10:58:10,704] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:58:10.710501380Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:10.710513637Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:58:10.710522494Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:58:10.710528777Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:58:10.710535266Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:58:10.710541379Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:58:10.710547837Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:58:10.710553954Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:58:10.710560106Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:58:10.710567945Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:58:10.710578644Z     raise NotFound() from None
+web-1  | 2025-08-08T10:58:10.710587226Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:58:10.710596172Z 
+web-1  | 2025-08-08T10:58:10.710604233Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:58:10.710612552Z 
+web-1  | 2025-08-08T10:58:10.710655234Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:10.710663781Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:58:10.710670148Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:58:10.710676321Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:58:10.710682834Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:58:10.710688862Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:58:10.710695702Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:58:10.710701922Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:58:10.710708149Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:58:10.710714277Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:58:10.710720516Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:58:10.710750953Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:58:10.710757940Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:58:10.710764059Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:58:10.710770326Z     rv = template.render(context)
+web-1  | 2025-08-08T10:58:10.710778027Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:58:10.710784332Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:58:10.710790408Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:58:10.710796742Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:58:10.710802758Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:58:10.710808964Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:58:10.710815146Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:58:10.710822797Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:58:10.710835931Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:58:38.271600603Z [2025-08-08 10:58:38,270] ERROR in app: Exception on /login/ [GET]
+web-1  | 2025-08-08T10:58:38.271645206Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:38.271652071Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:58:38.271658093Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:58:38.271663839Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:58:38.271669814Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:58:38.271675651Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:58:38.271681561Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:58:38.271687167Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:58:38.271692984Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:58:38.271698612Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:58:38.271704506Z     raise NotFound() from None
+web-1  | 2025-08-08T10:58:38.271710912Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:58:38.271716921Z 
+web-1  | 2025-08-08T10:58:38.271722343Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:58:38.271744941Z 
+web-1  | 2025-08-08T10:58:38.271750503Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:38.271756154Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:58:38.271761923Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:58:38.271767479Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:58:38.271773285Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:58:38.271778726Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:58:38.271784521Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:58:38.271789901Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:58:38.271795583Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:58:38.271801227Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:58:38.271806813Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:58:38.271814162Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:58:38.271820814Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:58:38.271826398Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:58:38.271832419Z     rv = template.render(context)
+web-1  | 2025-08-08T10:58:38.271839867Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:58:38.271846262Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:58:38.271852104Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:58:38.271857830Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:58:38.271863376Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:58:38.271868970Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:58:38.271874691Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:58:38.271880477Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:58:38.271888317Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:58:40.533855856Z [2025-08-08 10:58:40,532] ERROR in app: Exception on /login/ [GET]
+web-1  | 2025-08-08T10:58:40.533897313Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:40.533904035Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:58:40.533909363Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:58:40.533932148Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:58:40.533938496Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:58:40.533943339Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:58:40.533948265Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:58:40.533953036Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:58:40.533957866Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:58:40.533962651Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:58:40.533967747Z     raise NotFound() from None
+web-1  | 2025-08-08T10:58:40.533982932Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:58:40.533988202Z 
+web-1  | 2025-08-08T10:58:40.533992810Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:58:40.533997682Z 
+web-1  | 2025-08-08T10:58:40.534002269Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:40.534007055Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:58:40.534012104Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:58:40.534016911Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:58:40.534023745Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:58:40.534031683Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:58:40.534039445Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:58:40.534046988Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:58:40.534055115Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:58:40.534061865Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:58:40.534066733Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:58:40.534071613Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:58:40.534076817Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:58:40.534081547Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:58:40.534086363Z     rv = template.render(context)
+web-1  | 2025-08-08T10:58:40.534092660Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:58:40.534097829Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:58:40.534117137Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:58:40.534128905Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:58:40.534134094Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:58:40.534138944Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:58:40.534143891Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:58:40.534148807Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:58:40.534155833Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:58:53.448190299Z [2025-08-08 10:58:53,446] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:58:53.448237543Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:53.448247829Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:58:53.448256049Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:58:53.448263925Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:58:53.448271634Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:58:53.448279655Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:58:53.448288415Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:58:53.448294171Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:58:53.448299946Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:58:53.448305383Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:58:53.448310830Z     raise NotFound() from None
+web-1  | 2025-08-08T10:58:53.448316292Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:58:53.448321886Z 
+web-1  | 2025-08-08T10:58:53.448327012Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:58:53.448332433Z 
+web-1  | 2025-08-08T10:58:53.448337534Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:53.448342657Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:58:53.448348055Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:58:53.448353639Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:58:53.448359101Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:58:53.448364295Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:58:53.448369703Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:58:53.448411419Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:58:53.448419455Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:58:53.448432436Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:58:53.448443459Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:58:53.448471047Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:58:53.448478606Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:58:53.448486758Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:58:53.448494384Z     rv = template.render(context)
+web-1  | 2025-08-08T10:58:53.448502580Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:58:53.448508178Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:58:53.448513534Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:58:53.448519157Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:58:53.448524786Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:58:53.448530280Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:58:53.448535787Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:58:53.448541379Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:58:53.448549120Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:58:54.749283536Z [2025-08-08 10:58:54,747] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:58:54.749347656Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:54.749355758Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:58:54.749362853Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:58:54.749368965Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:58:54.749375287Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:58:54.749381186Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:58:54.749387142Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:58:54.749392889Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:58:54.749408999Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:58:54.749415340Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:58:54.749440730Z     raise NotFound() from None
+web-1  | 2025-08-08T10:58:54.749446859Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:58:54.749453047Z 
+web-1  | 2025-08-08T10:58:54.749458659Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:58:54.749464416Z 
+web-1  | 2025-08-08T10:58:54.749470027Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:54.749475729Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:58:54.749481652Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:58:54.749487446Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:58:54.749493431Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:58:54.749499119Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:58:54.749505130Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:58:54.749510921Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:58:54.749516920Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:58:54.749522779Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:58:54.749528647Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:58:54.749534634Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:58:54.749540668Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:58:54.749546540Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:58:54.749552452Z     rv = template.render(context)
+web-1  | 2025-08-08T10:58:54.749559265Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:58:54.749565253Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:58:54.749570942Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:58:54.749576912Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:58:54.749582697Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:58:54.749588693Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:58:54.749594571Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:58:54.749601019Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:58:54.749609473Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:58:56.476301977Z [2025-08-08 10:58:56,475] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:58:56.476345416Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:56.476354894Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:58:56.476363185Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:58:56.476370951Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:58:56.476378744Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:58:56.476386038Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:58:56.476393256Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:58:56.476401108Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:58:56.476408571Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:58:56.476416286Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:58:56.476423954Z     raise NotFound() from None
+web-1  | 2025-08-08T10:58:56.476431320Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:58:56.476439855Z 
+web-1  | 2025-08-08T10:58:56.476447198Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:58:56.476454469Z 
+web-1  | 2025-08-08T10:58:56.476461226Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:56.476468752Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:58:56.476476501Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:58:56.476483853Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:58:56.476491473Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:58:56.476498711Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:58:56.476506980Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:58:56.476514179Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:58:56.476521328Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:58:56.476529088Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:58:56.476537082Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:58:56.476544615Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:58:56.476552346Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:58:56.476559732Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:58:56.476593003Z     rv = template.render(context)
+web-1  | 2025-08-08T10:58:56.476602821Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:58:56.476610880Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:58:56.476618244Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:58:56.476625840Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:58:56.476632966Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:58:56.476640107Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:58:56.476647120Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:58:56.476654936Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:58:56.476665755Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:58:57.127723007Z [2025-08-08 10:58:57,126] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:58:57.127768663Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:57.127775919Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:58:57.127781587Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:58:57.127786686Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:58:57.127791968Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:58:57.127797030Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:58:57.127802502Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:58:57.127807566Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:58:57.127812782Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:58:57.127818030Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:58:57.127823251Z     raise NotFound() from None
+web-1  | 2025-08-08T10:58:57.127828340Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:58:57.127833659Z 
+web-1  | 2025-08-08T10:58:57.127838575Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:58:57.127843657Z 
+web-1  | 2025-08-08T10:58:57.127848525Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:57.127853513Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:58:57.127858683Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:58:57.127878947Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:58:57.127884411Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:58:57.127889431Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:58:57.127894644Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:58:57.127900158Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:58:57.127905380Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:58:57.127910513Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:58:57.127915811Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:58:57.127920980Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:58:57.127926282Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:58:57.127931305Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:58:57.127936506Z     rv = template.render(context)
+web-1  | 2025-08-08T10:58:57.127942768Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:58:57.127948032Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:58:57.127953096Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:58:57.127958356Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:58:57.127963414Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:58:57.127968636Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:58:57.127973828Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:58:57.127979078Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:58:57.127986372Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:58:58.940396350Z [2025-08-08 10:58:58,939] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:58:58.940436496Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:58.940444694Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:58:58.940450414Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:58:58.940455963Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:58:58.940461611Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:58:58.940467259Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:58:58.940472892Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:58:58.940592024Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:58:58.940602343Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:58:58.940607782Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:58:58.940612551Z     raise NotFound() from None
+web-1  | 2025-08-08T10:58:58.940617113Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:58:58.940621855Z 
+web-1  | 2025-08-08T10:58:58.940626253Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:58:58.940630766Z 
+web-1  | 2025-08-08T10:58:58.940636101Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:58:58.940642450Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:58:58.940650009Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:58:58.940656330Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:58:58.940663223Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:58:58.940670244Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:58:58.940676900Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:58:58.940682541Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:58:58.940687325Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:58:58.940698379Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:58:58.940704153Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:58:58.940711783Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:58:58.940718360Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:58:58.940724914Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:58:58.940735567Z     rv = template.render(context)
+web-1  | 2025-08-08T10:58:58.940746315Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:58:58.940751832Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:58:58.940757505Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:58:58.940763760Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:58:58.940770294Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:58:58.940775460Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:58:58.940781519Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:58:58.940796252Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:58:58.940804588Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:59:00.419244310Z [2025-08-08 10:59:00,417] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:59:00.419309657Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:00.419319056Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:59:00.419326451Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:59:00.419333511Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:59:00.419341290Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:59:00.419349590Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:59:00.419357414Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:59:00.419364868Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:59:00.419372423Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:59:00.419380071Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:59:00.419388127Z     raise NotFound() from None
+web-1  | 2025-08-08T10:59:00.419395412Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:59:00.419403186Z 
+web-1  | 2025-08-08T10:59:00.419410622Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:59:00.419418043Z 
+web-1  | 2025-08-08T10:59:00.419424801Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:00.419432242Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:59:00.419440170Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:59:00.419447607Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:59:00.419470037Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:59:00.419481167Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:59:00.419488056Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:59:00.419494812Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:59:00.419502548Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:59:00.419510263Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:59:00.419517783Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:59:00.419574976Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:59:00.419584053Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:59:00.419591171Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:59:00.419598779Z     rv = template.render(context)
+web-1  | 2025-08-08T10:59:00.419607714Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:59:00.419614620Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:59:00.419621030Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:59:00.419628230Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:59:00.419634897Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:59:00.419642479Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:59:00.419649583Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:59:00.419657254Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:59:00.419667413Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:59:03.062773795Z [2025-08-08 10:59:03,061] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:59:03.062819075Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:03.062827058Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:59:03.062833515Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:59:03.062839539Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:59:03.062846587Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:59:03.062853373Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:59:03.062859856Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:59:03.062866460Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:59:03.062872940Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:59:03.062879296Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:59:03.062886026Z     raise NotFound() from None
+web-1  | 2025-08-08T10:59:03.062892375Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:59:03.062899567Z 
+web-1  | 2025-08-08T10:59:03.062905804Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:59:03.062938109Z 
+web-1  | 2025-08-08T10:59:03.062944679Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:03.062950839Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:59:03.062957825Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:59:03.062964407Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:59:03.062970872Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:59:03.062977354Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:59:03.062984155Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:59:03.062990551Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:59:03.062996444Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:59:03.063002585Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:59:03.063009162Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:59:03.063015806Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:59:03.063022516Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:59:03.063028884Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:59:03.063035895Z     rv = template.render(context)
+web-1  | 2025-08-08T10:59:03.063043519Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:59:03.063049811Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:59:03.063056320Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:59:03.063062438Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:59:03.063069051Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:59:03.063075493Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:59:03.063081766Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:59:03.063088385Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:59:03.063097109Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:59:05.494031564Z [2025-08-08 10:59:05,492] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:59:05.494095864Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:05.494105757Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:59:05.494113084Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:59:05.494152249Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:59:05.494160169Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:59:05.494167582Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:59:05.494175537Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:59:05.494198268Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:59:05.494205839Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:59:05.494212508Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:59:05.494219556Z     raise NotFound() from None
+web-1  | 2025-08-08T10:59:05.494228822Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:59:05.494237250Z 
+web-1  | 2025-08-08T10:59:05.494245226Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:59:05.494253245Z 
+web-1  | 2025-08-08T10:59:05.494260825Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:05.494268300Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:59:05.494276501Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:59:05.494284268Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:59:05.494292560Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:59:05.494300216Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:59:05.494308492Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:59:05.494316086Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:59:05.494324512Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:59:05.494332521Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:59:05.494340956Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:59:05.494349210Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:59:05.494357078Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:59:05.494364819Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:59:05.494372480Z     rv = template.render(context)
+web-1  | 2025-08-08T10:59:05.494380413Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:59:05.494387079Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:59:05.494393261Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:59:05.494408788Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:59:05.494415011Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:59:05.494422049Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:59:05.494429303Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:59:05.494436770Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:59:05.494457381Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:59:09.042041101Z [2025-08-08 10:59:09,040] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:59:09.042091004Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:09.042101198Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:59:09.042109991Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:59:09.042117839Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:59:09.042124873Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:59:09.042130219Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:59:09.042135766Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:59:09.042141175Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:59:09.042146627Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:59:09.042151961Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:59:09.042157396Z     raise NotFound() from None
+web-1  | 2025-08-08T10:59:09.042162816Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:59:09.042168349Z 
+web-1  | 2025-08-08T10:59:09.042173412Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:59:09.042178608Z 
+web-1  | 2025-08-08T10:59:09.042183629Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:09.042188793Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:59:09.042209122Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:59:09.042214383Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:59:09.042219853Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:59:09.042224983Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:59:09.042230331Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:59:09.042256127Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:59:09.042261797Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:59:09.042267072Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:59:09.042273476Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:59:09.042280953Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:59:09.042288294Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:59:09.042302737Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:59:09.042310285Z     rv = template.render(context)
+web-1  | 2025-08-08T10:59:09.042319292Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:59:09.042326964Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:59:09.042334240Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:59:09.042341896Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:59:09.042349346Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:59:09.042358044Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:59:09.042366270Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:59:09.042375147Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:59:09.042385181Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:59:55.169823309Z [2025-08-08 10:59:55,168] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:59:55.169889995Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:55.169897807Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:59:55.169904480Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:59:55.169910191Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:59:55.169916205Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:59:55.169921965Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:59:55.169928140Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:59:55.169933942Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:59:55.169939698Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:59:55.169945410Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:59:55.169987057Z     raise NotFound() from None
+web-1  | 2025-08-08T10:59:55.169993610Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:59:55.169999814Z 
+web-1  | 2025-08-08T10:59:55.170005320Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:59:55.170010906Z 
+web-1  | 2025-08-08T10:59:55.170016487Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:55.170022109Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:59:55.170027945Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:59:55.170033639Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:59:55.170039474Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:59:55.170045004Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:59:55.170051032Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:59:55.170056515Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:59:55.170062329Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:59:55.170068015Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:59:55.170073610Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:59:55.170079610Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:59:55.170085468Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:59:55.170091170Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:59:55.170096987Z     rv = template.render(context)
+web-1  | 2025-08-08T10:59:55.170104965Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:59:55.170110885Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:59:55.170116588Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:59:55.170122444Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:59:55.170128212Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:59:55.170134048Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:59:55.170139801Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:59:55.170145766Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:59:55.170154050Z TypeError: argument of type 'NoneType' is not iterable
+web-1  | 2025-08-08T10:59:57.424044975Z [2025-08-08 10:59:57,422] ERROR in app: Exception on /favicon.ico [GET]
+web-1  | 2025-08-08T10:59:57.424101037Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:57.424108469Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+web-1  | 2025-08-08T10:59:57.424115020Z     rv = self.dispatch_request()
+web-1  | 2025-08-08T10:59:57.424120610Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 891, in dispatch_request
+web-1  | 2025-08-08T10:59:57.424126330Z     self.raise_routing_exception(req)
+web-1  | 2025-08-08T10:59:57.424131598Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 500, in raise_routing_exception
+web-1  | 2025-08-08T10:59:57.424137262Z     raise request.routing_exception  # type: ignore[misc]
+web-1  | 2025-08-08T10:59:57.424142509Z   File "/usr/local/lib/python3.9/site-packages/flask/ctx.py", line 362, in match_request
+web-1  | 2025-08-08T10:59:57.424147688Z     result = self.url_adapter.match(return_rule=True)  # type: ignore
+web-1  | 2025-08-08T10:59:57.424152858Z   File "/usr/local/lib/python3.9/site-packages/werkzeug/routing/map.py", line 629, in match
+web-1  | 2025-08-08T10:59:57.424158200Z     raise NotFound() from None
+web-1  | 2025-08-08T10:59:57.424163325Z werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+web-1  | 2025-08-08T10:59:57.424168592Z 
+web-1  | 2025-08-08T10:59:57.424173559Z During handling of the above exception, another exception occurred:
+web-1  | 2025-08-08T10:59:57.424178707Z 
+web-1  | 2025-08-08T10:59:57.424183556Z Traceback (most recent call last):
+web-1  | 2025-08-08T10:59:57.424188517Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+web-1  | 2025-08-08T10:59:57.424193730Z     response = self.full_dispatch_request()
+web-1  | 2025-08-08T10:59:57.424198844Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+web-1  | 2025-08-08T10:59:57.424203966Z     rv = self.handle_user_exception(e)
+web-1  | 2025-08-08T10:59:57.424209028Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 802, in handle_user_exception
+web-1  | 2025-08-08T10:59:57.424214218Z     return self.handle_http_exception(e)
+web-1  | 2025-08-08T10:59:57.424219280Z   File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 777, in handle_http_exception
+web-1  | 2025-08-08T10:59:57.424224418Z     return self.ensure_sync(handler)(e)  # type: ignore[no-any-return]
+web-1  | 2025-08-08T10:59:57.424229602Z   File "/app/app.py", line 509, in not_found
+web-1  | 2025-08-08T10:59:57.424234811Z     return render_template("404.html"), 404
+web-1  | 2025-08-08T10:59:57.424240013Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+web-1  | 2025-08-08T10:59:57.424245426Z     return _render(app, template, context)
+web-1  | 2025-08-08T10:59:57.424258570Z   File "/usr/local/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+web-1  | 2025-08-08T10:59:57.424295366Z     rv = template.render(context)
+web-1  | 2025-08-08T10:59:57.424302070Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+web-1  | 2025-08-08T10:59:57.424307744Z     self.environment.handle_exception()
+web-1  | 2025-08-08T10:59:57.424312885Z   File "/usr/local/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+web-1  | 2025-08-08T10:59:57.424318540Z     raise rewrite_traceback_stack(source=source)
+web-1  | 2025-08-08T10:59:57.424338148Z   File "/app/templates/404.html", line 1, in top-level template code
+web-1  | 2025-08-08T10:59:57.424344178Z     {% extends "_layout.html" %}
+web-1  | 2025-08-08T10:59:57.424349515Z   File "/app/templates/_layout.html", line 51, in top-level template code
+web-1  | 2025-08-08T10:59:57.424354830Z     <li class="nav-item"><a class="nav-link {% if 'stock' in request.endpoint and 'history' not in request.endpoint %}active{% endif %}" href="{{ url_for('stock') }}"><i class="bi bi-box-seam"></i>Stok Durumu</a></li>
+web-1  | 2025-08-08T10:59:57.424362301Z TypeError: argument of type 'NoneType' is not iterable
