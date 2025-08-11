@@ -1,12 +1,4 @@
-Flask
-Flask-Login
-Flask-Migrate
-Flask-SQLAlchemy
-psycopg2-binary
-python-dotenv
-gunicorn
-werkzeug
-pandas
-openpyxl
-celery
-redis
+flask
+flask_sqlalchemy
+flask_login
+# Add other dependencies as needed
